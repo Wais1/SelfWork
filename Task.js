@@ -13,6 +13,13 @@ export class Task {
     // Returns date passed since started.
     getTaskDuration() {
         let date = new Date();
-        return date.getSeconds() - this.timeStarted.getSeconds();
+        let datePassed = this.timeStarted - date; 
+        
+        // strip the ms
+        datePassed /= 1000;
+
+        // get seconds 
+        var seconds = Math.round(datePassed);
+        return seconds;
     }
 }
