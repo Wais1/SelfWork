@@ -1,0 +1,43 @@
+main {
+    font-family: sans-serif;
+    margin:10% 5% 5% 10%;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+.task {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    background-color: antiquewhite;
+    padding: 1%;
+    margin: 1% 0% 1% 0%;
+}
+
+/* Task children */
+.task-name, .task-time-spent, .btn-toggle-start {
+    padding: 15px;
+}
+.task-name {
+    min-width: 100px;
+}
+.btn-toggle-start {
+    max-height: 10px;
+}
+
+/* Task children
+.task-time-spent {
+    flex: 2 0 1%;
+}
+.btn-toggle-start {
+    flex:  0 1%;
+}
+.task-name {
+    flex: 1 0 1%;
+}
+ */
+
