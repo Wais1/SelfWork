@@ -1,3 +1,3 @@
 "use strict";
-import Task from "./Task";
-alert("test")
+import { Task } from "./Task.js";
+alert("test");

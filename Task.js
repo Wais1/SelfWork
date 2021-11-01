@@ -1,4 +1,4 @@
-export default class Task {
+export class Task {
     constructor(name) {
         this.name = name;
         this.timeStarted = new Date();
