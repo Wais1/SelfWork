@@ -1,6 +1,28 @@
 "use strict";
 import { Task } from "./Task.js";
 
+
+// Update Task timer
+const updateTaskTimer =()=> {
+    console.log("test");
+    taskList.map(x => {
+        // Get DIV of task
+        let taskDiv = document.getElementById(taskList.indexOf(0).toString());
+        console.log(taskDiv);
+        // if(taskList.length < 1)
+        // {
+        //     console.log("Empty");
+        //     return;
+        // }
+        // let taskDuration = taskDiv.childNodes[1];
+        // console.log("reached");
+
+        // taskDuration.innerHTML = x.getTaskDuration();
+
+    });
+}
+
+
 // reference task container
 let taskContainer = document.getElementById("task-container");
 
@@ -8,16 +30,18 @@ let taskContainer = document.getElementById("task-container");
 // map function
 let taskList = [];
 
+
+
 const btnStart = document.getElementById("btn-start");
 
 const addTask = (name) => {
     let task = new Task(name);
     taskList.push(task);
 
-    addTaskToUI(name);
+   // addTaskToUI(name);
 }
 
-const addTaskToUI = (name) => {
+const addTaskToUI = (task) => {
     let div = document.createElement("div");
     div.classList.add("task");
 
@@ -26,10 +50,11 @@ const addTaskToUI = (name) => {
 
     let p = document.createElement("p");
     p.classList.add("task-name");
-    p.innerHTML = name;
+    p.innerHTML = task.name;
 
     let p1 = document.createElement("p");
     p1.classList.add("task-time-spent");
+    p1.innerText = task.getTaskDuration().toString();
 
     let btn = document.createElement("button");
     btn.classList.add("btn-toggle-start");
@@ -47,13 +72,17 @@ const addTaskToUI = (name) => {
     taskContainer.appendChild(div);
 }
 
+
 // Deletes tasks and regenerates DOM Tree
 const updateTaskUI =()=> {
     // Delete all tasks in container first
+    while (taskContainer.firstChild) {
+        taskContainer.firstChild.remove()
+    }
 
     // x is each task in the taskList
     taskList.map( x => {
-        addTaskToUI(x.name);
+        addTaskToUI(x);
     });
 }
 
@@ -65,19 +94,15 @@ const updateTaskUI =()=> {
 let addTaskButton = document.getElementById("addTask");
 let inputNameTask = document.getElementById("name-task");
 
-
-
 addTaskButton.addEventListener("click", function(e) {
     // Add task
-    addTask(inputNameTask.innerHTML);
+    addTask(inputNameTask.value);
     alert(inputNameTask.value);
-
 
     // Update Task UI
     updateTaskUI();
 });
 
-clickBot.addEventListener("click",function(){
-    var textValue = document.getElementById("#myText").value;
-    alert(textValue);
-})
+
+// Update UI every monitor refresh
+setInterval(updateTaskTimer, 1000);
