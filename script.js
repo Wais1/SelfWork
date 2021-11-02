@@ -5,23 +5,17 @@ import { Task } from "./Task.js";
 // Update Task timer
 const updateTaskTimer =()=> {
     console.log("test");
-    taskList.map(x => {
-        // Get DIV of task
-        let taskDiv = document.getElementById(taskList.indexOf(0).toString());
-        console.log(taskDiv);
-        // if(taskList.length < 1)
-        // {
-        //     console.log("Empty");
-        //     return;
-        // }
-        // let taskDuration = taskDiv.childNodes[1];
-        // console.log("reached");
+    taskList.map((currTask, index) => {
+        // Get DIV of task. (getelemenbyID, need to get parent then child.)
+        let taskDiv = taskContainer.childNodes[index];
 
-        // taskDuration.innerHTML = x.getTaskDuration();
+        // Get Task duration, 2nd child of "task" div
+        let taskDuration = taskDiv.childNodes[1];
 
+        // Update task duration text
+        taskDuration.innerHTML = currTask.getTaskDuration();
     });
 }
-
 
 // reference task container
 let taskContainer = document.getElementById("task-container");
@@ -29,7 +23,6 @@ let taskContainer = document.getElementById("task-container");
 // empty task list
 // map function
 let taskList = [];
-
 
 
 const btnStart = document.getElementById("btn-start");
@@ -59,8 +52,14 @@ const addTaskToUI = (task) => {
     let btn = document.createElement("button");
     btn.classList.add("btn-toggle-start");
 
+    // Task's start/pause button
     btn.addEventListener("click", function(e) {
-        alert(task.getTaskDuration());
+        // Toggle active
+        task.toggleActive();
+        alert("Task duration: " + task.getTaskDuration());
+        alert("Total Seconds" + task.getTotalSeconds());
+
+
         // Learn more : alert(e.target)
     });
 
@@ -97,7 +96,6 @@ let inputNameTask = document.getElementById("name-task");
 addTaskButton.addEventListener("click", function(e) {
     // Add task
     addTask(inputNameTask.value);
-    alert(inputNameTask.value);
 
     // Update Task UI
     updateTaskUI();

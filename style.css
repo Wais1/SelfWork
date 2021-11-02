@@ -3,6 +3,22 @@ main {
     margin:10% 5% 5% 10%;
 }
 
+/* Tasks Header */
+h2 {
+    font-size: 1.8em;
+}
+/* Input */
+#name-task {
+    font-size: 20px;
+    font-size: max(18px, 1em);
+    font-family: inherit;
+    padding: 0.25em 0.5em;
+    background-color: #fff;
+    border: 1px solid rgb(rgb(114, 108, 63), green, blue);
+
+    border-radius: 4px;
+}
+
 .container {
     display: flex;
     justify-content: space-between;
@@ -23,11 +39,38 @@ main {
     padding: 15px;
 }
 .task-name {
+    font-size:20px;
+    font-weight: bold;
     min-width: 100px;
 }
 .btn-toggle-start {
     max-height: 10px;
 }
+
+/* Add Task button */
+
+.btn-add-task {
+    background-color: rgb(204, 164, 78); /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+.btn-add-task:hover {
+    background-color: rgb(210, 180, 115); /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+
 
 /* Task children
 .task-time-spent {
