@@ -35,7 +35,7 @@ h2 {
 }
 
 /* Task children */
-.task-name, .task-time-spent, .btn-toggle-start {
+.task-name, .task-time-spent, .btn-start, .task-total-time {
     padding: 15px;
 }
 .task-name {
@@ -43,9 +43,20 @@ h2 {
     font-weight: bold;
     min-width: 100px;
 }
-.btn-toggle-start {
+.btn-start {
     max-height: 10px;
 }
+
+/* Toggle image pause and resume */
+.btn-img-pause{
+    background: url("public/pause.svg") center no-repeat;
+    background-size: 20px 20px;
+}
+.btn-img-resume{
+    background: url("public/resume.svg") center no-repeat;
+    background-size: 20px 20px;
+}
+
 
 /* Add Task button */
 

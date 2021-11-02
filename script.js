@@ -4,16 +4,29 @@ import { Task } from "./Task.js";
 
 // Update Task timer
 const updateTaskTimer =()=> {
-    console.log("test");
     taskList.map((currTask, index) => {
+        
         // Get DIV of task. (getelemenbyID, need to get parent then child.)
         let taskDiv = taskContainer.childNodes[index];
 
         // Get Task duration, 2nd child of "task" div
         let taskDuration = taskDiv.childNodes[1];
 
-        // Update task duration text
-        taskDuration.innerHTML = currTask.getTaskDuration();
+        // Get Total Task duration, 4th child of "task" div
+        let totalTaskDuration = taskDiv.childNodes[3];
+
+
+        // If task is not active, set timer to total seconds.
+        if(!currTask.getIsActive()){
+            // Set to total seconds.
+            taskDuration.innerHTML = "";
+            // totalTaskDuration.innerHTML = currTask.getTotalSeconds();
+
+        } else {
+            // Update task duration text
+            taskDuration.innerHTML = currTask.getTaskDuration();
+        }
+
     });
 }
 
@@ -47,18 +60,30 @@ const addTaskToUI = (task) => {
 
     let p1 = document.createElement("p");
     p1.classList.add("task-time-spent");
-    p1.innerText = task.getTaskDuration().toString();
+    p1.innerText = task.getTaskDuration();
+
+    let p3 = document.createElement("p");
+    p3.classList.add("task-total-time");
+    p3.innerHTML = task.getTotalSeconds();
 
     let btn = document.createElement("button");
-    btn.classList.add("btn-toggle-start");
+    btn.classList.add("btn-start");
+    btn.classList.add("btn-img-pause");
+
 
     // Task's start/pause button
     btn.addEventListener("click", function(e) {
+        // alert("Task duration: " + task.getTaskDuration());
         // Toggle active
         task.toggleActive();
-        alert("Task duration: " + task.getTaskDuration());
-        alert("Total Seconds" + task.getTotalSeconds());
+        // alert("Total Seconds" + task.getTotalSeconds());
 
+        // Toggles pause svg
+        togglePauseImg(btn, task);
+
+        // Update view on the totalSeconds (faster)
+        p3.innerHTML = task.formatSeconds(task.getTotalSeconds());
+        p1.innerHTML = "";
 
         // Learn more : alert(e.target)
     });
@@ -67,10 +92,25 @@ const addTaskToUI = (task) => {
     div.appendChild(p);
     div.appendChild(p1);
     div.appendChild(btn);
+    div.appendChild(p3);
     
     taskContainer.appendChild(div);
 }
 
+// Toggle pause button img to resume / vice versa
+
+const togglePauseImg =(btn, task)=> {
+    if(task.getIsActive()) 
+    {
+        btn.classList.remove("btn-img-resume");
+        btn.classList.add("btn-img-pause");
+    }
+    else {
+        btn.classList.remove("btn-img-pause");
+        btn.classList.add("btn-img-resume");
+    }
+
+}
 
 // Deletes tasks and regenerates DOM Tree
 const updateTaskUI =()=> {
@@ -99,6 +139,17 @@ addTaskButton.addEventListener("click", function(e) {
 
     // Update Task UI
     updateTaskUI();
+
+    // Clear input section
+    inputNameTask.value = "";
+});
+
+// Add listener for pressing enter on input
+inputNameTask.addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.key === 'Enter') {
+        addTaskButton.click();
+    }
 });
 
 
